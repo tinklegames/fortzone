@@ -8,32 +8,247 @@
   <title>Fortzone Battle Royale</title>
   <link rel="stylesheet" href="TemplateData/style.css">
 
+  <style>
+    /* ---------- INTRO SCREEN ---------- */
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      background-color: #414141;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    #intro-screen.hidden-intro {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #intro-logo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    #intro-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #d3a410, #b7870f, #ffe4a1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 8px rgba(211,165,16,0.4));
+      opacity: 0;
+      animation: titleFade 1s ease forwards 0.4s;
+    }
+
+    @keyframes titleFade {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ---------- SVG ANIMATIONS ---------- */
+    @keyframes bounce {
+      0%,
+      100% {
+        translate: 0px 36px;
+      }
+
+      50% {
+        translate: 0px 46px;
+      }
+    }
+
+    @keyframes bounce2 {
+      0%,
+      100% {
+        translate: 0px 46px;
+      }
+
+      50% {
+        translate: 0px 56px;
+      }
+    }
+
+    @keyframes umbral {
+      0% {
+        stop-color: #d3a5102e;
+      }
+
+      50% {
+        stop-color: rgba(211, 165, 16, 0.519);
+      }
+
+      100% {
+        stop-color: #d3a5102e;
+      }
+    }
+
+    @keyframes particles {
+      0%,
+      100% {
+        translate: 0px 16px;
+      }
+
+      50% {
+        translate: 0px 6px;
+      }
+    }
+
+    #particles {
+      animation: particles 4s ease-in-out infinite;
+    }
+
+    #animatedStop {
+      animation: umbral 4s infinite;
+    }
+
+    #bounce {
+      animation: bounce 4s ease-in-out infinite;
+      translate: 0px 36px;
+    }
+
+    #bounce2 {
+      animation: bounce2 4s ease-in-out infinite;
+      translate: 0px 46px;
+      animation-delay: 0.5s;
+    }
+  </style>
+
   <script>
     const overlayBackgroundColor = "#555555";
     const progressBarFillColor = "#f76426";
     const progressBarBackgroundColor = "#000000";
     const progressBarBorderColor = "#000000";
   </script>
-
 </head>
 
-<body class="light">
+<body class="light intro-active">
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div id="intro-logo-wrapper">
+      <div id="intro-title">Tinkle Games</div>
+
+      <!-- SVG LOGO -->
+      <svg xmlns="http://www.w3.org/2000/svg" height="200" width="200">
+        <g style="order:-1;">
+          <polygon transform="rotate(45 100 100)" stroke-width="1" stroke="#d3a410"
+            fill="none" points="70,70 148,50 130,130 50,150" id="bounce"></polygon>
+
+          <polygon transform="rotate(45 100 100)" stroke-width="1" stroke="#d3a410"
+            fill="none" points="70,70 148,50 130,130 50,150" id="bounce2"></polygon>
+
+          <polygon transform="rotate(45 100 100)" stroke-width="2"
+            fill="#414750" points="70,70 150,50 130,130 50,150"></polygon>
+
+          <polygon fill="url(#gradiente)" stroke-width="2"
+            points="100,70 150,100 100,130 50,100"></polygon>
+
+          <defs>
+            <linearGradient id="gradiente" x1="0%" y1="0%" x2="10%" y2="100%">
+              <stop offset="20%" style="stop-color:#1e2026;"></stop>
+              <stop offset="60%" style="stop-color:#414750;"></stop>
+            </linearGradient>
+          </defs>
+
+          <polygon transform="translate(20, 31)" stroke-width="2"
+            fill="#b7870f" points="80,50 80,75 80,99 40,75"></polygon>
+
+          <polygon transform="translate(20, 31)" stroke-width="2"
+            fill="url(#gradiente2)" points="40,-40 80,-40 80,99 40,75"></polygon>
+
+          <defs>
+            <linearGradient id="gradiente2" x1="10%" y1="-17%" x2="0%" y2="100%">
+              <stop offset="20%" style="stop-color:#d3a51000;"></stop>
+              <stop offset="100%" style="stop-color:#d3a51054;" id="animatedStop"></stop>
+            </linearGradient>
+          </defs>
+
+          <polygon transform="rotate(180 100 100) translate(20, 20)"
+            stroke-width="2" fill="#d3a410"
+            points="80,50 80,75 80,99 40,75"></polygon>
+
+          <polygon transform="translate(60, 20)" stroke-width="2"
+            fill="url(#gradiente3)"
+            points="40,-40 80,-40 80,85 40,110.2"></polygon>
+
+          <defs>
+            <linearGradient id="gradiente3" x1="0%" y1="0%" x2="10%" y2="100%">
+              <stop offset="20%" style="stop-color:#d3a51000;"></stop>
+              <stop offset="100%" style="stop-color:#d3a51054;"></stop>
+            </linearGradient>
+          </defs>
+
+          <polygon transform="rotate(45 100 100) translate(80, 95)"
+            fill="#ffe4a1" points="5,0 5,5 0,5 0,0" id="particles"></polygon>
+
+          <polygon transform="rotate(45 100 100) translate(80, 55)"
+            fill="#ccb069" points="6,0 6,6 0,6 0,0" id="particles"></polygon>
+
+          <polygon transform="rotate(45 100 100) translate(70, 80)"
+            fill="#fff" points="2,0 2,2 0,2 0,0" id="particles"></polygon>
+
+          <polygon fill="#292d34"
+            points="29.5,99.8 100,142 100,172 29.5,130"></polygon>
+
+          <polygon transform="translate(50, 92)"
+            fill="#1f2127" points="50,50 120.5,8 120.5,35 50,80"></polygon>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <!-- END INTRO -->
+
+
+
+  <!-- UNITY GAME -->
   <div id="unity-container" class="unity-desktop">
     <canvas id="unity-canvas"></canvas>
   </div>
+
   <div id="loading-cover" style="display:none;">
     <div id="unity-loading-bar">
       <div id="unity-logo"><img src="logo.png"></div>
-      <div id="unity-progress-bar-empty" style="display: none;">
+      <div id="unity-progress-bar-empty" style="display:none;">
         <div id="unity-progress-bar-full"></div>
       </div>
       <div class="spinner"></div>
     </div>
   </div>
 
+
   <script>
     const buildUrl = "Build";
     const loaderUrl = buildUrl + "/FortzoneWebGL.loader.js";
+
     const config = {
       dataUrl: buildUrl + "/FortzoneWebGL.data.unityweb",
       frameworkUrl: buildUrl + "/FortzoneWebGL.framework.js.unityweb",
@@ -42,65 +257,43 @@
       companyName: "Fahrenheit Dev",
       productName: "Fortzone Battle Royale",
       productVersion: "0.8.8",
+      devicePixelRatio: (window.devicePixelRatio || 1) * 0.8
     };
 
-    // Вставляем логику снижения devicePixelRatio
-    var ratio = window.devicePixelRatio || 1;
-    ratio *= 0.8; // уменьшаем на 20%
-    config.devicePixelRatio = ratio; 
-
-    const container = document.querySelector("#unity-container");
     const canvas = document.querySelector("#unity-canvas");
+    const container = document.querySelector("#unity-container");
     const loadingCover = document.querySelector("#loading-cover");
     const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
     const progressBarFull = document.querySelector("#unity-progress-bar-full");
-    const spinner = document.querySelector('.spinner'); 
-
-    if (overlayBackgroundColor !== "-" && overlayBackgroundColor !== " " && overlayBackgroundColor !== "")
-      canvas.style.background = overlayBackgroundColor;
-
-    if (progressBarFillColor !== "-" && progressBarFillColor !== " " && progressBarFillColor !== "")
-      progressBarFull.style.background = progressBarFillColor;
-
-    if (progressBarBackgroundColor !== "-" && progressBarBackgroundColor !== " " && progressBarBackgroundColor !== "")
-      progressBarEmpty.style.background = progressBarBackgroundColor;
-
-    if (progressBarBorderColor !== "-" && progressBarBorderColor !== " " && progressBarBorderColor !== "")
-      progressBarEmpty.style.border.color = progressBarBorderColor;
-
-
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      container.className = "unity-mobile";
-    }
+    const spinner = document.querySelector(".spinner");
 
     loadingCover.style.display = "";
 
-    const unityLoader = document.createElement("script");
-    unityLoader.src = loaderUrl;
-    unityLoader.onload = async () => {
-      //await _gpAwaiter.ready;
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
       createUnityInstance(canvas, config, (progress) => {
         spinner.style.display = "none";
         progressBarEmpty.style.display = "";
-        progressBarFull.style.width = `${100 * progress}%`;
-      }).then((unityInstance) => {
-        window.unityInstance = unityInstance;
-        //_unityAwaiter.done(unityInstance);
+        progressBarFull.style.width = `${progress * 100}%`;
+      }).then(() => {
         loadingCover.style.display = "none";
-      }).catch((message) => {
-        //_unityAwaiter.abort(message);
-        alert(message);
-      });
+      }).catch(alert);
     };
-    document.body.appendChild(unityLoader);
+    document.body.appendChild(script);
 
-    document.addEventListener("pointerdown", () => {
-      container.focus();
-      window.focus();
-      canvas.focus();
+    /* ---------- INTRO FADE OUT ---------- */
+    window.addEventListener("load", () => {
+      const intro = document.getElementById("intro-screen");
+
+      setTimeout(() => {
+        intro.classList.add("hidden-intro");
+        document.body.classList.remove("intro-active");
+
+        setTimeout(() => intro.remove(), 800);
+      }, 2000); // intro duration
     });
-
   </script>
-</body>
 
+</body>
 </html>
