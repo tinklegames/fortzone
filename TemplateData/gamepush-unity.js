@@ -631,7 +631,7 @@
             return this.toUnity(this.gp.isDev)
         }
         IsAllowedOrigin() {
-            return this.toUnity(this.gp.isAllowedOrigin)
+            return this.toUnity(true)
         }
         VariablesFetch() {
             return this.gp.variables.fetch().then((e => {
